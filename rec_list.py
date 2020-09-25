@@ -41,10 +41,7 @@ def first_string(strlist, min = ""):
 def split_list(strlist, r_tuple=(Node(None,None),Node(None,None),Node(None,None)) ):
     r_list = list(r_tuple)
     if (not strlist):
-        if (not r_list[0] and not r_list[1] and not r_list[2]):
-            return None
-        else:
-            return tuple(r_list)
+        return tuple(r_list)
 
     if strlist.value[0].lower() in ['a','e','i','o','u']:
         if r_list[0].value == None:
@@ -66,4 +63,4 @@ def split_list(strlist, r_tuple=(Node(None,None),Node(None,None),Node(None,None)
 
     return split_list(strlist.rest, tuple(r_list))
 
-
+print(Node("xyz", Node("Abc", Node("49ers", None))))

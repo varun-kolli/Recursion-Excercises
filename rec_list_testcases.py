@@ -4,6 +4,9 @@ from  rec_list import *
 # Starter test cases - write more!
 
 class TestRecList(unittest.TestCase):
+    def test_repr(self):
+        x = Node("xyz", Node("Abc", Node("49ers", None)))
+        self.assertEqual(repr(x), "Node('xyz', Node('Abc', Node('49ers', None)))")
 
     def test_first1(self):
         strlist = Node("xyz", Node("Abc", Node("49ers", None)))
@@ -12,6 +15,10 @@ class TestRecList(unittest.TestCase):
     def test_first2(self):
         strlist = None
         self.assertEqual(first_string(strlist), None)
+
+    def test_first3(self):
+        strlist = Node("foo", Node("hello", Node("805", Node("Luke", None))))
+        self.assertEqual(first_string(strlist),"805")
 
     def test_split1(self):
         strlist = Node("xyz", Node("Abc", Node("49ers", None)))
