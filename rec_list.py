@@ -21,8 +21,16 @@ class Node:
 # Returns first (as determined by Python compare) string in StrList
 # If StrList is empty (None), return None
 # Must be implemented recursively
-def first_string(strlist):
-    pass
+def first_string(strlist, min = ""):
+    if not strlist:
+        return None
+    if strlist.rest == None:
+        return min
+    if strlist.value < strlist.rest.value:
+        return first_string(strlist.rest, strlist.value)
+    else:
+        return first_string(strlist.rest, strlist.rest.value)
+
 
 # StrList -> (StrList, StrList, StrList)
 # Returns a tuple with 3 new StrLists,
@@ -30,5 +38,32 @@ def first_string(strlist):
 # the second with strings from the input list that start with a consonant,
 # the third with strings that don't start with an alpha character
 # Must be implemented recursively
-def split_list(strlist):
-    pass
+def split_list(strlist, r_tuple=(Node(None,None),Node(None,None),Node(None,None)) ):
+    r_list = list(r_tuple)
+    if (not strlist):
+        if (not r_list[0] and not r_list[1] and not r_list[2]):
+            return None
+        else:
+            return tuple(r_list)
+
+    if strlist.value[0].lower() in ['a','e','i','o','u']:
+        if r_list[0].value == None:
+            r_list[0] = Node(strlist.value, None)
+        else:
+            r_list[0] = Node(r_list[0].value, Node(strlist.value, None))
+
+    if (strlist.value[0].isalpha()) and (not strlist.value[0].lower() in ['a','e','i','o','u']):
+        if r_list[1].value == None:
+            r_list[1] = Node(strlist.value, None)
+        else:
+            r_list[1] = Node(r_list[1].value, Node(strlist.value, None))
+
+    if not strlist.value[0].isalpha():
+        if r_list[2].value == None:
+            r_list[2] = Node(strlist.value, None)
+        else:
+            r_list[2] = Node(r_list[2].value, Node(strlist.value, None))
+
+    return split_list(strlist.rest, tuple(r_list))
+
+
